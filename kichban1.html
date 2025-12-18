@@ -115,6 +115,17 @@
             display: block;
             margin-top: 5px;
         }
+        .image-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -142,15 +153,21 @@
             <ol>
                 <li>
                     <strong>Xem Lịch lãnh đạo:</strong> Tại trang chủ của Phần mềm họp thông minh hiển thị mặc định là Lịch lãnh đạo. Nếu công chức là thư ký/giúp việc của lãnh đạo thì phải theo dõi lịch này và nhấn nút tuần sau để xem lịch lãnh đạo vì mặc định phần mềm đang chỉ hiển thị tuần này. Trường hợp công chức không phải là thư ký/giúp việc lãnh đạo thì không cần phải quan tâm tới lịch này.
-                    <br><em>[Hiển thị anh1.png]</em>
+                    <div class="image-container">
+                        <img src="anh1.png" alt="Lịch lãnh đạo">
+                    </div>
                 </li>
                 <li>
                     <strong>Nhấn vào tab Lịch đơn vị:</strong> Để xem các cuộc họp của đơn vị. Hiện tại Phần mềm họp thông minh hiển thị mặc định lịch theo tuần hiện tại. Do đó phải nhấn vào nút 'Tuần' để xem lịch của tuần kế tiếp.
-                    <br><em>[Hiển thị anh2.png]</em>
+                    <div class="image-container">
+                        <img src="anh2.png" alt="Lịch đơn vị">
+                    </div>
                 </li>
                 <li>
                     <strong>Nhấn vào tab Lịch cá nhân:</strong> Để xem lịch của cá nhân. Phần mềm họp thông minh hiển thị mặc định lịch theo tuần hiện tại. Do đó phải nhấn vào nút 'Tuần' để xem lịch của tuần kế tiếp thì mới có thể xác định được thứ 3 tuần tới cán bộ, công chức đó có lịch họp cụ thể hay không.
-                    <br><em>[Hiển thị anh3.png]</em>
+                    <div class="image-container">
+                        <img src="anh3.png" alt="Lịch cá nhân">
+                    </div>
                 </li>
             </ol>
 
