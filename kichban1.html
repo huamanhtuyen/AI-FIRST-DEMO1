@@ -1,0 +1,33 @@
+PHẦN MỀM HỌP THÔNG MINH
+Tài liệu này mô tả chức năng Theo dõi lịch họp trước và sau khi triển khai AI-First
+
+I. TRƯỚC KHI TRIỂN KHAI AI-FIRST
+- Xem xét với đối tượng là công chức tại phòng chuyên môn trong cơ quan;
+- Phần mềm họp thông minh hiện tại được thiết kế có 3 loại lịch họp: Lịch lãnh đạo, Lịch đơn vị, Lịch cá nhân;
+- Lịch họp cá nhân thể hiện được các cuộc họp của công chức đang đăng nhập;
+- Lịch họp đơn vị chưa thể hiện được công chức có phải tham gia hay không. Trong thực tế có những cuộc họp của đơn vị mà công chức không tham gia hoặc phải tham gia tùy nội dung cuộc họp;
+- Lịch lãnh đạo đang thể hiện các cuộc họp của lãnh đạo chủ trì, bao hàm trong đó có sự tham gia của nhiều đơn vị con và một số công chức thuộc văn phòng đơn vị có nhiệm vụ làm giúp việc/thư ký lãnh đạo;
+Như vậy, tình huống đối với một công chức thuộc phòng chức năng chuyên môn tại thời điểm thứ 5 của tuần này cần theo dõi lịch họp phải tham gia vào thứ 3 tuần sau đó (vì nhớ ra thứ 3 tuần sau đó phải đi xử lý công việc nào đó), thì trước khi triển khai các tính năng AI-First, công chức có thể theo dõi lịch họp thông qua các bước như sau:
+1. Tại trang chủ của Phần mềm họp thông minh hiển thị mặc định là Lịch lãnh đạo, nếu công chức là thư ký/giúp việc của lãnh đạo thì phải theo dõi lịch này và nhấn nút tuần sau để xem lịch lãnh đạo vì mặc định phần mềm đang chỉ hiển thị tuần này. Trường hợp công chức không phải là thư ký/giúp việc lãnh đạo thì không cần phải quan tâm tới lịch này.
+[Hiển thị anh1.png]
+2. Nhấn vào tab Lịch đơn vị để xem các cuộc họp của đơn vị, hiện tại Phần mềm họp thông minh hiển thị mặc định lịch theo tuần hiện tại. Do đó phải nhấn vào nút 'Tuần' để xem lịch của tuần kế tiếp. 
+[Hiển thị anh2.png]
+3. Nhấn vào tab Lịch cá nhân để xem lịch của cá nhân. Phần mềm họp thông minh hiển thị mặc định lịch theo tuần hiện tại. Do đó phải nhấn vào nút 'Tuần' để xem lịch của tuần kế tiếp thì mới có thể xác định được thứ 3 tuần tới cán bộ, công chức đó có lịch họp cụ thể hay không.
+[Hiển thị anh3.png]
+* Như vậy, để xem xét trong tương lai gần có lịch họp hay không, cán bộ công chức phải thực hiện một số thao tác nhất định, tuy không nhiều, nhưng cũng không phải là ít và cũng phải được tập huấn sử dụng phần mềm mới có thể sử dụng được, vì nếu không tập huấn thì có thể sẽ bị mờ thông tin chỗ lịch của đơn vị, liệu mình có phải tham gia hay không? phải được tập huấn hoặc đọc tài liệu để hiểu được phần mềm đang xử lý như thế nào?
+
+II. SAU KHI TRIỂN KHAI AI-FIRST
+Sau khi triển khai các chứng năng AI-First thì chỉ cần tại 1 màn hình duy nhất và không phải thao tác gì, cũng không cần phải được tập huấn và phải nhớ phần mềm được lập trình hoạt động phần lịch này như thế nào. Cán bộ công chức chỉ cần hỏi AI tại một màn hình duy nhất là có ngay kết quả, mọi thứ diễn ra như sau:
+[Làm màn hình html thể hiện tính năng AI-First cho việc hỏi lịch họp như kịch bản bên dưới:]
+- Cán bộ/công chức: Thứ 3 tuần tới tôi có lịch họp không bạn?
+- AI:
++ Thinking: Hôm nay là thứ 5, ngày 24/9/2026. Thứ 3 tuần tới sẽ là ngày 29/9/2026
++ Thingking: Tài khoản đang đăng nhập là tuantc (Trần Công Tuấn), công chức Phòng Tài vụ quản trị
++ Thingking: Chạy công cụ MCP lấy thông tin lịch theo tài khoản và thời gian.
++ Thingking: Tổng hợp kết quả
++ Trả lời: Thứ 3 tuần tới, ngày 29/9/2026 bạn có lịch họp như sau:
+++ Nội dung cuộc họp: Họp rà soát hồ sơ chuẩn bị kế hoạch dự toán năm 2027
+++ Thời gian: 14h đến 17h ngày 29/9/2026
+++ Chủ trì: Đ/c Nguyễn Văn A, trưởng phòng.
+++ Địa điểm: Phòng họp 201, tòa T3
+++ Thành phần: Toàn thể cán bộ công chức tổ xây dựng dự toán.
