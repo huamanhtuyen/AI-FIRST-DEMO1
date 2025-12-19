@@ -126,6 +126,86 @@
             border-radius: 4px;
             padding: 5px;
         }
+        .ai-suggestions {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: rgba(255,255,255,0.15);
+            border-radius: 4px;
+            border-left: 3px solid #ffc107;
+        }
+        .ai-suggestions strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        .ai-suggestions ul {
+            margin-left: 20px;
+            margin-bottom: 0;
+        }
+        .ai-suggestions li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            list-style: none;
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            color: white;
+            font-size: 1em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .chat-input-area input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        .chat-input-area input:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.6);
+            background-color: rgba(255,255,255,0.15);
+        }
+        .send-btn {
+            padding: 12px 25px;
+            background-color: #ffc107;
+            color: #333;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .send-btn:hover {
+            background-color: #ffb300;
+        }
+        .send-btn:active {
+            background-color: #ff9800;
+        }
+        .suggestion-btn {
+            background-color: transparent;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+            width: 100%;
+            text-align: left;
+        }
+        .suggestion-btn:hover {
+            background-color: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.7);
+        }
     </style>
 </head>
 <body>
@@ -194,7 +274,7 @@
                         <strong>AI Assistant:</strong>
                         <div class="ai-thinking">💭 Thinking: Hôm nay là thứ 5, ngày 24/9/2026. Thứ 3 tuần tới sẽ là ngày 29/9/2026</div>
                         <div class="ai-thinking">💭 Thinking: Tài khoản đang đăng nhập là tuantc (Trần Công Tuấn), công chức Phòng Tài vụ quản trị</div>
-                        <div class="ai-thinking">💭 Thinking: Chạy công cụ MCP lấy thông tin lịch theo tài khoản và thời gian</div>
+                        <div class="ai-thinking">💭 Thinking: Thực thi AI Agent lấy thông tin lịch theo tài khoản và thời gian</div>
                         <div class="ai-thinking">💭 Thinking: Tổng hợp kết quả</div>
                         <div class="ai-answer">
                             ✅ Thứ 3 tuần tới, ngày 29/9/2026 bạn có lịch họp như sau:
@@ -205,7 +285,25 @@
                                 <strong>📍 Địa điểm:</strong> Phòng họp 201, Tòa T3
                                 <strong>👥 Thành phần:</strong> Toàn thể cán bộ công chức tổ xây dựng dự toán
                             </div>
+                            <div class="ai-suggestions">
+                                <strong>💡 Bạn có thể:</strong>
+                                <ul>
+                                    <li><button class="suggestion-btn" onclick="fillChatInput('Xác nhận tham gia cuộc họp')">✅ Xác nhận tham gia cuộc họp</button></li>
+                                    <li><button class="suggestion-btn" onclick="fillChatInput('Đăng ký vắng mặt')">❌ Đăng ký vắng mặt</button></li>
+                                    <li><button class="suggestion-btn" onclick="fillChatInput('Uỷ quyền tham gia họp')">👥 Uỷ quyền tham gia họp</button></li>
+                                </ul>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <input 
+                            type="text" 
+                            id="chatInput" 
+                            placeholder="Nhập lệnh hoặc câu hỏi..." 
+                            onkeypress="handleKeyPress(event)"
+                        >
+                        <button class="send-btn" onclick="sendMessage()">📤 Gửi</button>
                     </div>
                 </div>
             </div>
@@ -220,5 +318,59 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        function fillChatInput(text) {
+            const chatInput = document.getElementById('chatInput');
+            chatInput.value = text;
+            chatInput.focus();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (!message) return;
+            
+            // Tạo thông báo gửi
+            const chatBox = document.querySelector('.chat-box');
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = 'chat-message user-msg';
+            userMsgDiv.innerHTML = `<strong>Cán bộ/Công chức:</strong> ${escapeHtml(message)}`;
+            chatBox.appendChild(userMsgDiv);
+            
+            // Xóa input
+            chatInput.value = '';
+            
+            // Cuộn xuống cuối
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            // Mô phỏng AI response (tùy chọn)
+            setTimeout(() => {
+                const aiMsgDiv = document.createElement('div');
+                aiMsgDiv.className = 'chat-message ai-msg';
+                aiMsgDiv.innerHTML = `<strong>AI Assistant:</strong> Đã ghi nhận yêu cầu của bạn: "${escapeHtml(message)}". Đang xử lý...`;
+                chatBox.appendChild(aiMsgDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 500);
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+    </script>
 </body>
 </html>
